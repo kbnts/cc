@@ -1,0 +1,95 @@
+version: "3.9"
+services:
+  web:
+    image: "clearcodetask:dev"
+    build:
+      context: .
+      args:
+        DJANGO_ENV: development
+    command: ./scripts/wait-for-it.sh kafka:9092 -- uvicorn clearcode.asgi:application --host 0.0.0.0 --port 8888 --reload
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+      - kafka
+      - zookeeper
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+      - DEBUG=True
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: bitnami/redis:6.2.10
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - redis:/data
+  zookeeper:
+    image: "confluentinc/cp-zookeeper"
+    hostname: zookeeper
+    ports:
+      - 32181:32181
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=32181
+  kafka:
+    image: confluentinc/cp-kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:32181
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT_HOST://localhost:29092,PLAINTEXT://kafka:9092
+      - KAFKA_BROKER_ID=1
+      - TOPIC_AUTO_CREATE=true
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+  faust:
+    image: "clearcodetask:dev"
+    build:
+      context: .
+      args:
+        DJANGO_ENV: development
+    command: sh -c "./scripts/wait-for-it.sh kafka:9092 && faust -A apps.faustapp.app worker -l info"
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+      - kafka
+      - zookeeper
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+      - DEBUG=True
+volumes:
+  db:
+    driver: local
+  redis:
+    driver: local

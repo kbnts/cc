@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "clearcode"
+version = "0.1.0"
+description = ""
+authors = ["Kamil <kamil.bobola@patientsource.co.uk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.5"
+djangorestframework = "^3.14.0"
+django-environ = "^0.9.0"
+psycopg2 = "^2.9.5"
+hiredis = "^2.1.1"
+redis = "^4.4.2"
+faust-streaming = "^0.10.1"
+uvicorn = "^0.20.0"
+uvloop = "^0.17.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+pre-commit = "^2.21.0"
+django-debug-toolbar = "^3.8.1"
+pytest-django = "^4.5.2"
+locust = "^2.14.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
