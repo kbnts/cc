@@ -47,9 +47,9 @@ Data flow looks roughly like this:
 
 `docker compose -f docker-compose.locust.yaml up --scale worker=4`
 
-`docker compose down faust` - Backend performance is not important in this test
+`docker compose stop faust` - Backend performance is not important in this test
     
-then go to `http://localhost:8089` or see the report at [docs/locust_report.html](docs/locust_report.html)
+then go to [http://localhost:8089](http://localhost:8089) or see the report at [docs/locust_report.html](docs/locust_report.html)
 
 # Code style
 

@@ -1,10 +1,10 @@
 import random
 import string
 
-from locust import HttpUser, task
+from locust import task, FastHttpUser
 
 
-class CartUser(HttpUser):
+class CartUser(FastHttpUser):
     @task
     def add_item_to_a_cart(self):
         letters = list(string.ascii_lowercase)
