@@ -36,7 +36,7 @@ curl -v --location --request POST 'http://localhost:8888/items/' \
 
 > Returns - 204 No Content
 
-Tracking tools are transparent to end users so, I can defer the process of saving a record effectively making the `/items/` endpoint sql-less (if the user has an active cart assigned to the session)
+Tracking apps are transparent to end users so, I can defer the process of saving a record effectively making the `/items/` endpoint sql-less (if the user has an active cart assigned to the session)
 
 Data flow looks roughly like this:
 
