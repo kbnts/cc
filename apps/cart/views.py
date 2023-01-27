@@ -19,7 +19,6 @@ item_publisher = ItemPublisher(client=KafkaPublisher())
 
 class AddItemAPIView(View):
     """
-
     Note: DRF doesn't support async views yet, this endpoint inherits from Django's base *View*
     """
 
@@ -31,10 +30,7 @@ class AddItemAPIView(View):
         response = HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
         # Bail if it's not a JSON request
-        if (
-            not (content_type := request.META.get("HTTP_ACCEPT"))
-            == self.expected_content_type
-        ):
+        if not (content_type := request.META.get("HTTP_ACCEPT")) == self.expected_content_type:
             logger.warning("Wrong content type: %s", content_type)
             return response
 

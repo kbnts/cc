@@ -42776,14 +42776,12 @@
                         : "rect";
                     }
                   );
-                  n.brushController
-                    .setPanels(r)
-                    .enableBrush(
-                      !(!o || !r.length) && {
-                        brushType: "auto",
-                        brushStyle: t.getModel("brushStyle").getItemStyle(),
-                      }
-                    );
+                  n.brushController.setPanels(r).enableBrush(
+                    !(!o || !r.length) && {
+                      brushType: "auto",
+                      brushStyle: t.getModel("brushStyle").getItemStyle(),
+                    }
+                  );
                 })(t, e, this, i, n),
                 (e = e),
                 t.setIconStatus(
