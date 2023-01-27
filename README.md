@@ -28,7 +28,7 @@ Tracking tools are transparent to end users so, I can defer the process of savin
 
 Data flow looks roughly like this:
 
-[![](https://mermaid.ink/img/pako:eNotTzFuwzAM_ArByQWSD3goYCDo0q3tFnVgRCp2Y1OOJBYo4vy9bNDteHe4O94wZhbs8VxoHeHjEBSG45tcTWr7hP3-eRvWCVLJ2kR5g9PRvqeYiz5EiN1QfzQCf5GeM4ykPEt5emjcvVK6EKwls8V_diOPO1G8iIel7oWsNohZqy3uCOr9gDv0Y6GJfdjtjwnYRlkkYO-QJZHNLWDQu1vJWn73Ddi3YrJDW5maHCbylxbsE81V7r-KQ06u?type=png)](https://mermaid.live/edit#pako:eNotTzFuwzAM_ArByQWSD3goYCDo0q3tFnVgRCp2Y1OOJBYo4vy9bNDteHe4O94wZhbs8VxoHeHjEBSG45tcTWr7hP3-eRvWCVLJ2kR5g9PRvqeYiz5EiN1QfzQCf5GeM4ykPEt5emjcvVK6EKwls8V_diOPO1G8iIel7oWsNohZqy3uCOr9gDv0Y6GJfdjtjwnYRlkkYO-QJZHNLWDQu1vJWn73Ddi3YrJDW5maHCbylxbsE81V7r-KQ06u)
+![diagram](docs/mermaid-diagram-2023-01-27-090650.png)
 
 
 # Performance
