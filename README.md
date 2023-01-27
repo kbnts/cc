@@ -7,7 +7,7 @@
 5. Send some data
 
 ```
-seq 15 | curl -v --location --request POST 'http://localhost:8888/items/' \
+curl -v --location --request POST 'http://localhost:8888/items/' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
