@@ -40,7 +40,7 @@ Tracking tools are transparent to end users so, I can defer the process of savin
 
 Data flow looks roughly like this:
 
-![diagram](docs/mermaid-diagram-2023-01-27-090650.png)
+![diagram](docs/mermaid-diagram-2023-01-27-102831.png)
 
 
 # Frontend Performance

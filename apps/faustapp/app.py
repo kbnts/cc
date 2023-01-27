@@ -38,9 +38,10 @@ async def update_cart(topic_item):
         )
         # This will also update items in expired carts.
         # The requirements are too vague to implement any kind of version control :)
-        item.name = topic_item.name
-        item.value = topic_item.value
-        await sync_to_async(item.save)()
+        if item.name != topic_item.name or item.value != topic_item.value:
+            item.name = topic_item.name
+            item.value = topic_item.value
+            await sync_to_async(item.save)()
         if created:
             await sync_to_async(cart.items.add)(item)
         await sync_to_async(cart.save)()
