@@ -33,7 +33,7 @@ async def add_item(items_stream):
 async def update_cart(topic_item):
     try:
         cart = await Cart.objects.aget(id=topic_item.cart_uuid)
-        item, created = await Item.objects.aget_or_create(
+        item, _ = await Item.objects.aget_or_create(
             external_id=topic_item.external_id
         )
         # This will also update items in expired carts.
@@ -42,8 +42,7 @@ async def update_cart(topic_item):
             item.name = topic_item.name
             item.value = topic_item.value
             await sync_to_async(item.save)()
-        if created:
-            await sync_to_async(cart.items.add)(item)
+        await sync_to_async(cart.items.add)(item)
         await sync_to_async(cart.save)()
     except Cart.DoesNotExist as e:
         logger.error("Cart does not exist: PK=%s: %s", topic_item.cart_uuid, e)
